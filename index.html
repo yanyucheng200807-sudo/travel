@@ -3,234 +3,234 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TripPick | 旅游景点推荐</title>
+  <title>TripPick | 旅游景点</title>
   <style>
     :root{
-      --bg:#0b1220;
-      --card:#101a2f;
-      --card2:#0f1a33;
-      --text:#e7ecff;
-      --muted:#9aa6d6;
-      --line:rgba(255,255,255,.08);
-      --accent:#7c5cff;
-      --accent2:#22c55e;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --shadow: 0 18px 40px rgba(0,0,0,.35);
-      --radius: 18px;
-      --radius2: 14px;
+      --bg: #f6fbff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: #dbeafe;          /* 浅蓝边框 */
+      --blue: #38bdf8;          /* 浅蓝主色 */
+      --blue-2: #0ea5e9;
+      --chip: #eff6ff;
+      --shadow: 0 10px 24px rgba(15, 23, 42, .06);
+      --radius: 16px;
+      --radius2: 12px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background: radial-gradient(1200px 700px at 20% -10%, rgba(124,92,255,.35), transparent 60%),
-                  radial-gradient(1000px 600px at 90% 0%, rgba(34,197,94,.22), transparent 55%),
-                  linear-gradient(180deg, #070b14 0%, var(--bg) 30%, #070b14 100%);
-      min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
     }
-    a{color:inherit}
-    .container{max-width:1120px;margin:0 auto;padding:28px 18px 60px}
+    .container{max-width:1120px;margin:0 auto;padding:22px 16px 56px}
     header{
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-      padding:18px 18px;background:rgba(16,26,47,.55);
-      border:1px solid var(--line);border-radius:var(--radius);
-      backdrop-filter: blur(10px);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
+      padding: 16px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
     }
-    .brand{
-      display:flex;align-items:center;gap:12px;min-width:220px;
-    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:240px}
     .logo{
-      width:42px;height:42px;border-radius:14px;
-      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(34,197,94,.75));
-      display:grid;place-items:center;font-weight:800;
+      width:40px;height:40px;border-radius:14px;
+      display:grid;place-items:center;
+      background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+      color:white;font-weight:800;
       letter-spacing:.5px;
     }
-    .brand h1{margin:0;font-size:18px;line-height:1.2}
-    .brand p{margin:0;color:var(--muted);font-size:12px}
+    .brand h1{margin:0;font-size:16px}
+    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+    .topRight{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       padding:8px 10px;border-radius:999px;
       border:1px solid var(--line);
+      background:#ffffff;
       color:var(--muted);
-      background:rgba(15,26,51,.5);
       font-size:12px;
       white-space:nowrap;
     }
-    .hero{
-      margin-top:18px;
-      display:grid;grid-template-columns: 1.2fr .8fr;gap:14px;
-    }
-    .heroCard{
-      padding:18px;border-radius:var(--radius);
+    kbd{
+      font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      background:#ffffff;
       border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(16,26,47,.65), rgba(16,26,47,.4));
+      padding:2px 6px;border-radius:8px;
+      color:var(--text);
+    }
+
+    .layout{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:14px;
+    }
+    @media (max-width: 920px){
+      .layout{grid-template-columns:1fr}
+    }
+
+    .panel{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
-      position:relative;overflow:hidden;
+      padding: 14px;
+      height: fit-content;
     }
-    .heroCard::before{
-      content:"";
-      position:absolute;inset:-60px -60px auto auto;
-      width:240px;height:240px;border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, rgba(124,92,255,.55), transparent 65%);
-      filter: blur(4px);
-    }
-    .heroTitle{margin:0 0 8px;font-size:24px}
-    .heroDesc{margin:0;color:var(--muted);line-height:1.7}
-    .statRow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
-    .stat{
-      flex:1;min-width:150px;
-      padding:12px;border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(15,26,51,.45);
-    }
-    .stat b{display:block;font-size:14px;margin-bottom:4px}
-    .stat span{color:var(--muted);font-size:12px}
-    .filters{
-      padding:18px;border-radius:var(--radius);
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(16,26,47,.55), rgba(16,26,47,.35));
-      box-shadow: var(--shadow);
-      display:grid;gap:12px;
-    }
-    .grid2{display:grid;grid-template-columns: 1fr 1fr;gap:10px}
-    .grid3{display:grid;grid-template-columns: 1fr 1fr 1fr;gap:10px}
-    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    .panel h2{margin:0 0 10px;font-size:14px}
+    label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
     input,select{
       width:100%;
-      padding:10px 12px;border-radius:14px;
+      padding:10px 12px;
+      border-radius: var(--radius2);
       border:1px solid var(--line);
-      background:rgba(12,18,32,.65);
+      background:#ffffff;
       color:var(--text);
       outline:none;
     }
-    input::placeholder{color:rgba(154,166,214,.7)}
-    .btnRow{display:flex;gap:10px;flex-wrap:wrap}
+    input:focus, select:focus{
+      border-color: rgba(56,189,248,.8);
+      box-shadow: 0 0 0 4px rgba(56,189,248,.15);
+    }
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    @media (max-width: 520px){
+      .grid2,.grid3{grid-template-columns:1fr}
+    }
+
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     button{
       cursor:pointer;
-      padding:10px 12px;border-radius:14px;
+      padding:10px 12px;
+      border-radius: var(--radius2);
       border:1px solid var(--line);
-      background:rgba(15,26,51,.55);
+      background:#ffffff;
       color:var(--text);
-      transition:.2s transform,.2s opacity,.2s background;
+      transition:.15s transform,.15s box-shadow,.15s border-color;
       display:inline-flex;align-items:center;gap:8px;
       user-select:none;
     }
-    button:hover{transform: translateY(-1px); background:rgba(18,32,72,.55)}
-    .primary{background:rgba(124,92,255,.22);border-color:rgba(124,92,255,.45)}
-    .primary:hover{background:rgba(124,92,255,.28)}
-    .success{background:rgba(34,197,94,.18);border-color:rgba(34,197,94,.35)}
-    .danger{background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.35)}
-    .muted{opacity:.85}
-    .sectionHead{
-      margin:22px 0 10px;
-      display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    button:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(15, 23, 42, .06);
+      border-color: rgba(56,189,248,.75);
     }
-    .sectionHead h2{margin:0;font-size:18px}
+    .primary{
+      background: rgba(56,189,248,.12);
+      border-color: rgba(56,189,248,.55);
+      color: #075985;
+    }
+    .danger{
+      background: rgba(239,68,68,.08);
+      border-color: rgba(239,68,68,.25);
+      color: #7f1d1d;
+    }
+
+    .main{
+      min-width: 0;
+    }
+    .sectionHead{
+      display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .sectionHead h2{margin:0;font-size:14px}
     .sectionHead p{margin:0;color:var(--muted);font-size:12px}
+
     .cards{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap:14px;
     }
-    @media (max-width: 980px){
-      .hero{grid-template-columns:1fr}
+    @media (max-width: 1100px){
       .cards{grid-template-columns: repeat(2, minmax(0, 1fr));}
     }
-    @media (max-width: 640px){
-      header{flex-direction:column;align-items:flex-start}
+    @media (max-width: 650px){
       .cards{grid-template-columns:1fr}
-      .grid2,.grid3{grid-template-columns:1fr}
     }
+
     .card{
-      border-radius:var(--radius);
+      background: var(--card);
       border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(16,26,47,.55), rgba(16,26,47,.35));
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      display:flex;flex-direction:column;
-      min-height: 380px;
-      position:relative;
+      display:flex;
+      flex-direction:column;
+      min-height: 340px;
     }
     .img{
-      height:160px;
-      background: #0e1730 center/cover no-repeat;
+      height:150px;
+      background: #e0f2fe center/cover no-repeat;
       position:relative;
     }
-    .badgeRow{
-      position:absolute;top:10px;left:10px;right:10px;
-      display:flex;justify-content:space-between;gap:10px;
-    }
-    .badge{
-      padding:6px 10px;border-radius:999px;
-      font-size:12px;
-      background:rgba(12,18,32,.75);
-      border:1px solid rgba(255,255,255,.12);
-      color:var(--text);
-      backdrop-filter: blur(8px);
-      display:inline-flex;align-items:center;gap:6px;
-    }
-    .badge.accent{border-color:rgba(124,92,255,.45); background:rgba(124,92,255,.18)}
-    .badge.green{border-color:rgba(34,197,94,.45); background:rgba(34,197,94,.16)}
-    .badge.warn{border-color:rgba(245,158,11,.45); background:rgba(245,158,11,.14)}
-    .content{padding:14px 14px 12px;display:flex;flex-direction:column;gap:10px;flex:1}
-    .titleRow{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-    .titleRow h3{margin:0;font-size:16px;line-height:1.25}
-    .subtitle{color:var(--muted);font-size:12px;margin-top:2px}
-    .stars{font-size:12px;color:var(--warn);white-space:nowrap}
-    .desc{color:rgba(231,236,255,.88);font-size:13px;line-height:1.65;margin:0}
-    .tags{display:flex;gap:8px;flex-wrap:wrap}
-    .tag{
-      font-size:12px;color:var(--muted);
-      padding:6px 10px;border-radius:999px;
+    .fav{
+      position:absolute; top:10px; right:10px;
+      width:34px; height:34px;
+      border-radius: 12px;
       border:1px solid var(--line);
-      background:rgba(15,26,51,.4);
+      background:#ffffff;
+      display:grid; place-items:center;
     }
+    .fav.on{
+      border-color: rgba(239,68,68,.35);
+      background: rgba(239,68,68,.08);
+    }
+
+    .content{padding:12px 12px 10px;display:flex;flex-direction:column;gap:10px;flex:1}
+    .titleRow{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .titleRow h3{margin:0;font-size:15px;line-height:1.25}
+    .meta{color:var(--muted);font-size:12px;margin-top:2px}
+    .rating{font-size:12px;color:var(--muted);white-space:nowrap}
+    .desc{margin:0;color:var(--text);opacity:.9;font-size:13px;line-height:1.6}
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{
+      font-size:12px;
+      color: #075985;
+      background: var(--chip);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .chip.muted{
+      color: var(--muted);
+      background:#ffffff;
+    }
+
     .actions{
-      padding:12px 14px 14px;
+      padding:10px 12px 12px;
       display:flex;gap:10px;flex-wrap:wrap;
       border-top:1px solid var(--line);
-      background:rgba(9,14,26,.25);
     }
     .spacer{flex:1}
-    .fav{
-      position:absolute;top:10px;right:10px;
-      width:36px;height:36px;border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(12,18,32,.75);
-      display:grid;place-items:center;
-      backdrop-filter: blur(8px);
+
+    .empty{
+      background: var(--card);
+      border: 1px dashed rgba(56,189,248,.5);
+      border-radius: var(--radius);
+      padding: 18px;
+      color: var(--muted);
     }
-    .fav.on{border-color:rgba(239,68,68,.45); background:rgba(239,68,68,.16)}
+
     .toast{
       position:fixed;left:50%;bottom:22px;transform:translateX(-50%);
-      background:rgba(12,18,32,.85);border:1px solid rgba(255,255,255,.14);
-      color:var(--text);padding:10px 12px;border-radius:999px;
+      background:#ffffff;
+      border:1px solid var(--line);
+      color:var(--text);
+      padding:10px 12px;border-radius:999px;
       display:none;gap:8px;align-items:center;
-      backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
       font-size:13px;
       z-index:50;
     }
-    .empty{
-      padding:22px;border-radius:var(--radius);
-      border:1px dashed rgba(255,255,255,.18);
-      color:var(--muted);
-      background:rgba(16,26,47,.25);
-    }
+
     footer{
-      margin-top:26px;color:var(--muted);font-size:12px;
+      margin-top:18px;
+      color: var(--muted);
+      font-size:12px;
       display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-      opacity:.9;
-    }
-    kbd{
-      font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      padding:2px 6px;border-radius:8px;
-      color:rgba(231,236,255,.95);
     }
   </style>
 </head>
@@ -240,45 +240,22 @@
       <div class="brand">
         <div class="logo">TP</div>
         <div>
-          <h1>TripPick | 旅游景点推荐</h1>
-          <p>用筛选+收藏，快速找到你想去的地方</p>
+          <h1>TripPick</h1>
+          <p>旅游景点信息检索</p>
         </div>
       </div>
-
-      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <div class="topRight">
         <span class="pill">快捷键：<kbd>/</kbd> 搜索</span>
         <span class="pill" id="favCountPill">收藏：0</span>
       </div>
     </header>
 
-    <div class="hero">
-      <div class="heroCard">
-        <h2 class="heroTitle">今天想去哪？</h2>
-        <p class="heroDesc">
-          这是一个轻量的景点推荐页：支持搜索、筛选、排序、收藏。
-          你也可以把数据换成你自己的城市/国家景点列表。
-        </p>
-        <div class="statRow">
-          <div class="stat">
-            <b id="statTotal">—</b>
-            <span>当前景点数量</span>
-          </div>
-          <div class="stat">
-            <b id="statCities">—</b>
-            <span>覆盖城市</span>
-          </div>
-          <div class="stat">
-            <b id="statTypes">—</b>
-            <span>景点类型</span>
-          </div>
-        </div>
-      </div>
+    <div class="layout">
+      <aside class="panel">
+        <h2>筛选</h2>
 
-      <div class="filters">
-        <div>
-          <label>搜索（名称 / 城市 / 标签）</label>
-          <input id="q" placeholder="例如：浅草 / 夜景 / 温泉 / 海滩" />
-        </div>
+        <label>搜索（名称 / 城市 / 标签）</label>
+        <input id="q" placeholder="例如：浅草 / 温泉 / 夜景" />
 
         <div class="grid2">
           <div>
@@ -320,190 +297,59 @@
         </div>
 
         <div class="btnRow">
-          <button class="primary" id="btnReset">重置筛选</button>
-          <button class="success" id="btnRandom">随机推荐一个</button>
+          <button class="primary" id="btnReset">重置</button>
+          <button class="primary" id="btnRandom">随机</button>
           <button class="danger" id="btnClearFav">清空收藏</button>
         </div>
-      </div>
+
+        <div style="margin-top:12px;color:var(--muted);font-size:12px;line-height:1.6">
+          数据来源：<code>places.json</code><br>
+          收藏存储：浏览器本地
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="sectionHead">
+          <div>
+            <h2>景点列表</h2>
+            <p id="resultInfo">—</p>
+          </div>
+          <div class="pill" id="statsPill">—</div>
+        </div>
+
+        <div id="cards" class="cards"></div>
+        <div id="empty" class="empty" style="display:none">没有匹配的结果。</div>
+
+        <footer>
+          <div>© TripPick</div>
+          <div>地图：打开 Google Maps 搜索</div>
+        </footer>
+      </main>
     </div>
-
-    <div class="sectionHead">
-      <div>
-        <h2>推荐列表</h2>
-        <p id="resultInfo">—</p>
-      </div>
-      <div class="pill muted" id="tipPill">小提示：收藏会保存在本地浏览器</div>
-    </div>
-
-    <div id="cards" class="cards"></div>
-    <div id="empty" class="empty" style="display:none">没有匹配的景点。试试换一个关键词或放宽筛选条件。</div>
-
-    <footer>
-      <div>© TripPick（示例站点）| 你可以改成自己的城市与景点数据</div>
-      <div>操作：点击 ❤️ 收藏 | “地图”会打开 Google Maps 搜索</div>
-    </footer>
   </div>
 
   <div class="toast" id="toast">已复制</div>
 
   <script>
-    // ====== 数据：你可以在这里增删改景点 ======
-    // price：建议用“每人预算（JPY）”估算
-    const PLACES = [
-      {
-        id:"tokyo-asakusa",
-        name:"浅草寺 & 仲见世",
-        city:"东京",
-        country:"日本",
-        type:"文化",
-        rating:4.7,
-        price:1500,
-        time:"半天",
-        bestSeason:"全年",
-        highlights:["雷门打卡","和风小吃","夜晚灯光"],
-        tags:["寺庙","街拍","小吃","夜景"],
-        image:"https://images.unsplash.com/photo-1549693578-d683be217e58?auto=format&fit=crop&w=1400&q=70",
-        note:"适合第一次来东京，交通方便，周边还能顺路去晴空塔。"
-      },
-      {
-        id:"tokyo-shibuya",
-        name:"涩谷十字路口 & 天空观景",
-        city:"东京",
-        country:"日本",
-        type:"城市",
-        rating:4.6,
-        price:3000,
-        time:"2-4小时",
-        bestSeason:"全年",
-        highlights:["人潮震撼","城市摄影","高空夜景"],
-        tags:["地标","夜景","购物","拍照"],
-        image:"https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1400&q=70",
-        note:"建议傍晚去：先逛街再看夜景，氛围拉满。"
-      },
-      {
-        id:"tokyo-odaiba",
-        name:"台场海滨公园",
-        city:"东京",
-        country:"日本",
-        type:"海滨",
-        rating:4.5,
-        price:2500,
-        time:"半天",
-        bestSeason:"春/秋",
-        highlights:["海边散步","彩虹大桥","日落氛围"],
-        tags:["海景","日落","放松","情侣"],
-        image:"https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1400&q=55",
-        note:"适合放空+散步，天气好时很出片。"
-      },
-      {
-        id:"kyoto-fushimi",
-        name:"伏见稻荷大社（千本鸟居）",
-        city:"京都",
-        country:"日本",
-        type:"文化",
-        rating:4.8,
-        price:1200,
-        time:"半天",
-        bestSeason:"全年",
-        highlights:["千本鸟居","登山小径","清晨人少"],
-        tags:["神社","徒步","摄影","鸟居"],
-        image:"https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1400&q=70",
-        note:"越往上人越少，建议早起去，体验最好。"
-      },
-      {
-        id:"kyoto-arashiyama",
-        name:"岚山竹林 & 渡月桥",
-        city:"京都",
-        country:"日本",
-        type:"自然",
-        rating:4.6,
-        price:3000,
-        time:"半天-一天",
-        bestSeason:"春/秋",
-        highlights:["竹林步道","河边风景","和服体验"],
-        tags:["自然","散步","拍照","和风"],
-        image:"https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1400&q=70",
-        note:"可以把天龙寺、嵯峨野小火车一起安排成一日路线。"
-      },
-      {
-        id:"osaka-dotonbori",
-        name:"道顿堀美食街",
-        city:"大阪",
-        country:"日本",
-        type:"美食",
-        rating:4.5,
-        price:5000,
-        time:"晚上",
-        bestSeason:"全年",
-        highlights:["章鱼烧","霓虹夜景","逛街氛围"],
-        tags:["美食","夜景","购物","热闹"],
-        image:"https://images.unsplash.com/photo-1562184647-7c64b8b3f9e8?auto=format&fit=crop&w=1400&q=70",
-        note:"适合夜游：吃吃喝喝+拍照，热闹到不想回酒店。"
-      },
-      {
-        id:"hokkaido-otaru",
-        name:"小樽运河",
-        city:"北海道",
-        country:"日本",
-        type:"城市",
-        rating:4.6,
-        price:4000,
-        time:"半天",
-        bestSeason:"冬/夏",
-        highlights:["运河夜景","玻璃工艺","甜品咖啡"],
-        tags:["夜景","文艺","拍照","散步"],
-        image:"https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1400&q=70",
-        note:"冬季雪景很浪漫，夏季也适合慢逛。"
-      },
-      {
-        id:"okinawa-beach",
-        name:"冲绳海滩浮潜（示例）",
-        city:"冲绳",
-        country:"日本",
-        type:"海滨",
-        rating:4.7,
-        price:12000,
-        time:"半天",
-        bestSeason:"夏",
-        highlights:["清澈海水","浮潜体验","度假放松"],
-        tags:["海滩","浮潜","度假","亲子"],
-        image:"https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=70",
-        note:"预算较高，但体验“度假感”直接拉满。"
-      }
-    ];
+    // ====== 从 places.json 读取数据（保持与之前字段一致） ======
+    let PLACES = [];
 
-    // ====== 工具函数 ======
     const $ = (id)=>document.getElementById(id);
-    const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
-    const yen = (n)=>"¥" + n.toLocaleString("ja-JP");
-    const starText = (r)=>{
-      const full = Math.floor(r);
-      const half = (r - full) >= 0.5 ? 1 : 0;
-      return "★".repeat(full) + (half ? "½" : "");
-    };
+    const yen = (n)=>"¥" + Number(n).toLocaleString("ja-JP");
 
-    // 评分→推荐级别
-    function ratingBadge(r){
-      if(r >= 4.75) return {text:"爆款推荐", cls:"accent"};
-      if(r >= 4.60) return {text:"高口碑", cls:"green"};
-      return {text:"值得一去", cls:"warn"};
-    }
-
-    // 预算档
     function budgetBucket(price){
-      if(price <= 2000) return "low";
-      if(price <= 8000) return "mid";
+      const p = Number(price);
+      if(p <= 2000) return "low";
+      if(p <= 8000) return "mid";
       return "high";
     }
 
-    // 简单匹配度：关键词命中 + 类型/城市匹配
     function scorePlace(p, query, city, type, budget){
       let s = 0;
       const q = query.trim().toLowerCase();
       if(q){
-        const hay = (p.name+" "+p.city+" "+p.type+" "+p.tags.join(" ")).toLowerCase();
+        const hay = (p.name+" "+p.city+" "+p.type+" "+(p.tags||[]).join(" ")).toLowerCase();
         if(hay.includes(q)) s += 8;
-        // 拆分关键词加分
         q.split(/\s+/).filter(Boolean).forEach(k=>{
           if(hay.includes(k)) s += 2;
         });
@@ -517,7 +363,7 @@
     }
 
     // ====== 收藏（localStorage） ======
-    const FAV_KEY = "trippick_favs_v1";
+    const FAV_KEY = "trippick_favs_v2";
     function getFavs(){
       try{
         const raw = localStorage.getItem(FAV_KEY);
@@ -529,9 +375,7 @@
       localStorage.setItem(FAV_KEY, JSON.stringify(arr));
       updateFavCount();
     }
-    function isFav(id){
-      return getFavs().includes(id);
-    }
+    function isFav(id){ return getFavs().includes(id); }
     function toggleFav(id){
       const favs = getFavs();
       const idx = favs.indexOf(id);
@@ -540,31 +384,26 @@
       setFavs(favs);
     }
     function updateFavCount(){
-      const n = getFavs().length;
-      $("favCountPill").textContent = `收藏：${n}`;
+      $("favCountPill").textContent = `收藏：${getFavs().length}`;
     }
 
-    // ====== UI：toast ======
+    // ====== toast ======
     let toastTimer = null;
     function toast(msg){
       const t = $("toast");
       t.textContent = msg;
       t.style.display = "inline-flex";
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=>{ t.style.display="none"; }, 1400);
+      toastTimer = setTimeout(()=>{ t.style.display="none"; }, 1200);
     }
 
-    // ====== 渲染 ======
+    // ====== UI ======
     function buildSelectOptions(){
       const cities = Array.from(new Set(PLACES.map(p=>p.city))).sort();
-      const types = Array.from(new Set(PLACES.map(p=>p.type))).sort();
-
+      const types  = Array.from(new Set(PLACES.map(p=>p.type))).sort();
       $("city").innerHTML = `<option value="all">全部</option>` + cities.map(c=>`<option value="${c}">${c}</option>`).join("");
       $("type").innerHTML = `<option value="all">全部</option>` + types.map(t=>`<option value="${t}">${t}</option>`).join("");
-
-      $("statTotal").textContent = PLACES.length;
-      $("statCities").textContent = cities.length;
-      $("statTypes").textContent = types.length;
+      $("statsPill").textContent = `景点：${PLACES.length} · 城市：${cities.length} · 类型：${types.length}`;
     }
 
     function render(){
@@ -583,12 +422,11 @@
           if(city !== "all" && p.city !== city) return false;
           if(type !== "all" && p.type !== type) return false;
           if(budget !== "all" && budgetBucket(p.price) !== budget) return false;
+
           if(query.trim()){
-            const hay = (p.name+" "+p.city+" "+p.type+" "+p.tags.join(" ")).toLowerCase();
+            const hay = (p.name+" "+p.city+" "+p.type+" "+(p.tags||[]).join(" ")).toLowerCase();
             const q = query.trim().toLowerCase();
-            // 必须至少命中一次
             if(!hay.includes(q)){
-              // 允许拆词命中（任意一个）
               const ks = q.split(/\s+/).filter(Boolean);
               if(ks.length && !ks.some(k=>hay.includes(k))) return false;
             }
@@ -596,28 +434,24 @@
           return true;
         });
 
-      if(sort === "rating_desc") list.sort((a,b)=>b.rating - a.rating);
-      else if(sort === "price_asc") list.sort((a,b)=>a.price - b.price);
-      else if(sort === "price_desc") list.sort((a,b)=>b.price - a.price);
-      else list.sort((a,b)=>b._score - a._score || b.rating - a.rating);
+      if(sort === "rating_desc") list.sort((a,b)=>Number(b.rating) - Number(a.rating));
+      else if(sort === "price_asc") list.sort((a,b)=>Number(a.price) - Number(b.price));
+      else if(sort === "price_desc") list.sort((a,b)=>Number(b.price) - Number(a.price));
+      else list.sort((a,b)=>b._score - a._score || Number(b.rating) - Number(a.rating));
 
-      $("resultInfo").textContent = `共找到 ${list.length} 个结果（从 ${PLACES.length} 个景点中筛选）`;
+      $("resultInfo").textContent = `结果：${list.length} / ${PLACES.length}`;
       $("empty").style.display = list.length ? "none" : "block";
 
       const cards = $("cards");
       cards.innerHTML = list.map(p=>{
-        const rb = ratingBadge(p.rating);
         const favOn = isFav(p.id);
-        const mapQ = encodeURIComponent(`${p.name} ${p.city} ${p.country}`);
+        const mapQ = encodeURIComponent(`${p.name} ${p.city} ${p.country || ""}`.trim());
         const mapUrl = `https://www.google.com/maps/search/?api=1&query=${mapQ}`;
 
+        const tags = (p.tags || []).slice(0,4);
         return `
           <article class="card">
-            <div class="img" style="background-image:url('${p.image}')">
-              <div class="badgeRow">
-                <span class="badge ${rb.cls}">✨ ${rb.text}</span>
-                <span class="badge">⏱ ${p.time}</span>
-              </div>
+            <div class="img" style="background-image:url('${p.image || ""}')">
               <button class="fav ${favOn ? "on" : ""}" title="收藏" data-fav="${p.id}">${favOn ? "❤️" : "🤍"}</button>
             </div>
 
@@ -625,40 +459,41 @@
               <div class="titleRow">
                 <div>
                   <h3>${p.name}</h3>
-                  <div class="subtitle">${p.city} · ${p.type} · 适合：${p.bestSeason}</div>
+                  <div class="meta">${p.city} · ${p.type}</div>
                 </div>
-                <div class="stars" title="评分">${starText(p.rating)} ${p.rating.toFixed(1)}</div>
+                <div class="rating">评分 ${Number(p.rating).toFixed(1)}</div>
               </div>
 
-              <p class="desc">${p.note}</p>
-
-              <div class="tags">
-                <span class="tag">预算 ${yen(p.price)}/人</span>
-                ${p.highlights.slice(0,3).map(h=>`<span class="tag">✅ ${h}</span>`).join("")}
+              <div class="chips">
+                <span class="chip">${yen(p.price)}/人</span>
+                <span class="chip muted">${p.time || "—"}</span>
+                <span class="chip muted">${p.bestSeason || "—"}</span>
               </div>
 
-              <div class="tags">
-                ${p.tags.slice(0,4).map(t=>`<span class="tag">#${t}</span>`).join("")}
+              <p class="desc">${p.note || ""}</p>
+
+              <div class="chips">
+                ${tags.map(t=>`<span class="chip muted">#${t}</span>`).join("")}
               </div>
             </div>
 
             <div class="actions">
-              <button class="primary" data-map="${mapUrl}">🗺 地图</button>
-              <button class="success" data-copy="${p.id}">📋 复制</button>
+              <button class="primary" data-map="${mapUrl}">地图</button>
+              <button data-copy="${p.id}">复制信息</button>
               <span class="spacer"></span>
-              <button data-more="${p.id}">ℹ️ 详情</button>
+              <button data-more="${p.id}">详情</button>
             </div>
           </article>
         `;
       }).join("");
 
-      // 绑定事件（事件委托）
+      // 绑定事件
       cards.querySelectorAll("[data-fav]").forEach(btn=>{
         btn.addEventListener("click", (e)=>{
           const id = e.currentTarget.getAttribute("data-fav");
           toggleFav(id);
           render();
-          toast(isFav(id) ? "已收藏" : "已取消收藏");
+          toast(isFav(id) ? "已收藏" : "已取消");
         });
       });
 
@@ -675,18 +510,19 @@
           const p = PLACES.find(x=>x.id===id);
           const text =
 `【${p.name}】
-地点：${p.city} · ${p.country}
+城市：${p.city}
+国家：${p.country || ""}
 类型：${p.type}
 评分：${p.rating}
 预算：${yen(p.price)}/人
-亮点：${p.highlights.join(" / ")}
-标签：${p.tags.join(", ")}
-推荐：${p.note}`;
+时长：${p.time || ""}
+季节：${p.bestSeason || ""}
+标签：${(p.tags||[]).join(", ")}
+备注：${p.note || ""}`.trim();
           try{
             await navigator.clipboard.writeText(text);
-            toast("已复制到剪贴板");
+            toast("已复制");
           }catch{
-            // 兜底：旧浏览器
             const ta = document.createElement("textarea");
             ta.value = text; document.body.appendChild(ta);
             ta.select(); document.execCommand("copy");
@@ -701,25 +537,24 @@
           const id = e.currentTarget.getAttribute("data-more");
           const p = PLACES.find(x=>x.id===id);
           alert(
-`📍 ${p.name}
-城市：${p.city}（${p.country}）
+`景点：${p.name}
+城市：${p.city}（${p.country || "—"}）
 类型：${p.type}
-推荐季节：${p.bestSeason}
-建议时长：${p.time}
 评分：${p.rating}
 预算：${yen(p.price)}/人
+建议时长：${p.time || "—"}
+推荐季节：${p.bestSeason || "—"}
 
 亮点：
-- ${p.highlights.join("\n- ")}
+- ${(p.highlights||[]).join("\n- ") || "—"}
 
 标签：
-- ${p.tags.join("\n- ")}`
+- ${(p.tags||[]).join("\n- ") || "—"}`
           );
         });
       });
     }
 
-    // ====== 交互 ======
     function resetFilters(){
       $("q").value = "";
       $("city").value = "all";
@@ -732,7 +567,6 @@
     }
 
     function randomPick(){
-      // 按当前筛选条件从结果里随机
       const query = $("q").value || "";
       const city = $("city").value;
       const type = $("type").value;
@@ -745,8 +579,9 @@
         if(city !== "all" && p.city !== city) return false;
         if(type !== "all" && p.type !== type) return false;
         if(budget !== "all" && budgetBucket(p.price) !== budget) return false;
+
         if(query.trim()){
-          const hay = (p.name+" "+p.city+" "+p.type+" "+p.tags.join(" ")).toLowerCase();
+          const hay = (p.name+" "+p.city+" "+p.type+" "+(p.tags||[]).join(" ")).toLowerCase();
           const q = query.trim().toLowerCase();
           const ks = q.split(/\s+/).filter(Boolean);
           if(!hay.includes(q) && !(ks.length && ks.some(k=>hay.includes(k)))) return false;
@@ -755,24 +590,21 @@
       });
 
       if(!candidates.length){
-        toast("没有可随机的结果");
+        toast("无可选结果");
         return;
       }
       const p = candidates[Math.floor(Math.random()*candidates.length)];
-      toast(`随机推荐：${p.name}`);
-      // 轻微定位到顶部，用户马上能看到提示再自己找
-      window.scrollTo({top: 0, behavior:"smooth"});
-      // 也可以自动弹详情
-      setTimeout(()=>alert(`🎲 随机推荐：${p.name}\n\n地点：${p.city}\n类型：${p.type}\n预算：${yen(p.price)}/人\n\n${p.note}`), 300);
+      toast(`随机：${p.name}`);
+      setTimeout(()=>alert(`随机：${p.name}\n城市：${p.city}\n类型：${p.type}\n预算：${yen(p.price)}/人`), 250);
     }
 
     function clearFavs(){
       setFavs([]);
       render();
-      toast("已清空收藏");
+      toast("已清空");
     }
 
-    // 搜索快捷键 /
+    // 快捷键 /
     window.addEventListener("keydown",(e)=>{
       if(e.key === "/" && document.activeElement !== $("q")){
         e.preventDefault();
@@ -783,19 +615,30 @@
       }
     });
 
-    // ====== 初始化 ======
-    buildSelectOptions();
-    updateFavCount();
-    render();
+    async function loadPlaces(){
+      try{
+        const res = await fetch("./places.json", { cache:"no-store" });
+        if(!res.ok) throw new Error("places.json 读取失败");
+        PLACES = await res.json();
+        buildSelectOptions();
+        updateFavCount();
+        render();
+      }catch(err){
+        console.error(err);
+        $("empty").style.display = "block";
+        $("empty").textContent = "加载 places.json 失败：请确认 places.json 与 index.html 在同一目录，并用本地服务器打开。";
+      }
+    }
 
     // 监听筛选变化
     ["q","city","type","budget","sort","onlyFav"].forEach(id=>{
       $(id).addEventListener(id==="q" ? "input" : "change", render);
     });
-
     $("btnReset").addEventListener("click", resetFilters);
     $("btnRandom").addEventListener("click", randomPick);
     $("btnClearFav").addEventListener("click", clearFavs);
+
+    loadPlaces();
   </script>
 </body>
 </html>
